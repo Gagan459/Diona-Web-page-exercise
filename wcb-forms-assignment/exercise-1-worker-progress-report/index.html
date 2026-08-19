@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Worker Progress Report — WCB Manitoba (Dynamic Demo)</title>
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<div class="app">
+
+  <!-- ============ EDITOR PANEL ============ -->
+  <aside class="editor" id="editor">
+    <div class="editor-head">
+      <h1>Worker Progress Report — Data Editor</h1>
+      <p class="editor-sub">Everything below feeds the live document on the right. Nothing is hardcoded — change a field, and the report (including page count) updates.</p>
+      <div class="editor-actions">
+        <button type="button" class="btn btn-sample" data-sample="short">Load short sample</button>
+        <button type="button" class="btn btn-sample" data-sample="long">Load long sample (forces 3 pages)</button>
+        <button type="button" class="btn btn-print" onclick="window.print()">Print / Save as PDF</button>
+      </div>
+    </div>
+
+    <form id="reportForm">
+      <fieldset>
+        <legend>Claim &amp; worker</legend>
+        <label>Worker name <input type="text" id="workerName" value="Madeleine Willson"></label>
+        <label>Claim number <input type="text" id="claimNo" value="20042047"></label>
+        <label>Worker App ID <input type="text" id="workerAppId" value="712041"></label>
+      </fieldset>
+
+      <fieldset>
+        <legend>Return to work</legend>
+        <label>Status
+          <select id="rtwStatus">
+            <option value="notMissed">I have not missed time from work</option>
+            <option value="notReturned">I have not returned to work</option>
+            <option value="returnedOn" selected>I returned to work on…</option>
+          </select>
+        </label>
+        <label class="conditional" data-show-for="rtwStatus:returnedOn">Return date <input type="date" id="rtwDate" value="2024-03-15"></label>
+
+        <label>Work duty
+          <select id="dutyType">
+            <option value="fullRegular">Full duties, regular hours</option>
+            <option value="fullReduced">Full duties, reduced hours</option>
+            <option value="modRegular">Modified duties, regular hours</option>
+            <option value="modReduced" selected>Modified duties, reduced hours</option>
+            <option value="other">Other</option>
+          </select>
+        </label>
+        <label class="conditional" data-show-for="dutyType:other">Other, please describe <input type="text" id="dutyOther"></label>
+
+        <label>How is the return to work going? <textarea id="rtwGoing" rows="2">Terrible. Testing Testing</textarea></label>
+        <label>Expected return date (if not yet returned) <input type="date" id="expectedReturn"></label>
+        <label>Concerns about returning to work <textarea id="concerns" rows="2"></textarea></label>
+        <label>Employer contact name <input type="text" id="contactName"></label>
+        <label>Date of last contact <input type="date" id="contactDate"></label>
+      </fieldset>
+
+      <fieldset>
+        <legend>Recovery</legend>
+        <label>Status
+          <select id="recoveryStatus">
+            <option value="notFull">I have not fully recovered</option>
+            <option value="full" selected>I have fully recovered</option>
+          </select>
+        </label>
+        <label>Comments about recovery <textarea id="recoveryComments" rows="2"></textarea></label>
+      </fieldset>
+
+      <fieldset>
+        <legend>Pain &amp; treatment</legend>
+        <label>Pain / discomfort (1 = none, 10 = severe)
+          <input type="range" id="painScale" min="1" max="10" value="2">
+          <output id="painScaleOut">2</output>
+        </label>
+
+        <label>Medical treatment
+          <select id="treatmentStatus">
+            <option value="notContinuing">Not continuing treatment</option>
+            <option value="continuing" selected>Continuing treatment</option>
+          </select>
+        </label>
+        <label class="conditional" data-show-for="treatmentStatus:continuing">Provider type <input type="text" id="providerType" value="Physiotherapist"></label>
+        <label class="conditional" data-show-for="treatmentStatus:continuing">Last treatment date <input type="date" id="lastTreatmentDate" value="2024-03-20"></label>
+        <label class="conditional" data-show-for="treatmentStatus:continuing">Last treatment provider name <input type="text" id="lastTreatmentName" value="Dr. Best"></label>
+        <label class="conditional" data-show-for="treatmentStatus:continuing">Next treatment date <input type="date" id="nextTreatmentDate"></label>
+        <label class="conditional" data-show-for="treatmentStatus:continuing">Chiropractor / physiotherapist frequency <input type="text" id="chiroFrequency" value="Twice weekly"></label>
+
+        <label>Medication
+          <select id="medicationStatus">
+            <option value="notTaking">Not taking medication</option>
+            <option value="taking" selected>Taking medication</option>
+          </select>
+        </label>
+        <label class="conditional" data-show-for="medicationStatus:taking">Medication name <input type="text" id="medicationName" value="Naproxen"></label>
+
+        <label>Home exercises
+          <select id="exerciseStatus">
+            <option value="notDoing">Not doing home exercises</option>
+            <option value="doing" selected>Doing home exercises</option>
+          </select>
+        </label>
+        <label class="conditional" data-show-for="exerciseStatus:doing">List exercises <textarea id="exerciseList" rows="2">Shoulder stretches, resistance band rows</textarea></label>
+
+        <label>Other information <textarea id="otherInfo" rows="2">No info Testing Testing</textarea></label>
+      </fieldset>
+    </form>
+  </aside>
+
+  <!-- ============ DOCUMENT PREVIEW (rendered by JS) ============ -->
+  <main class="preview-wrap">
+    <div id="pages"></div>
+  </main>
+
+</div>
+
+<!-- Hidden staging area used to measure block heights before pagination -->
+<div id="stage" aria-hidden="true"></div>
+
+<script src="script.js"></script>
+</body>
+</html>

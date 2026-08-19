@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Medical &amp; Travel Expense Request — WCB Manitoba (Dynamic Demo)</title>
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<div class="app">
+
+  <!-- ============ EDITOR PANEL ============ -->
+  <aside class="editor" id="editor">
+    <div class="editor-head">
+      <h1>Medical &amp; Travel Expense Request — Data Editor</h1>
+      <p class="editor-sub">Every table below can grow or shrink freely. The document on the right re-paginates itself from scratch on every change — try adding 8–10 rows to one table and watch a new page appear.</p>
+      <div class="editor-actions">
+        <button type="button" class="btn btn-sample" data-sample="small">Load small sample (1 row/table)</button>
+        <button type="button" class="btn btn-sample" data-sample="large">Load large sample (forces extra page)</button>
+        <button type="button" class="btn btn-print" onclick="window.print()">Print / Save as PDF</button>
+      </div>
+    </div>
+
+    <fieldset>
+      <legend>Claim &amp; worker</legend>
+      <label>Worker name <input type="text" id="workerName" value="Madeleine Willson"></label>
+      <label>Claim number <input type="text" id="claimNo" value="20042047"></label>
+      <label>Worker App ID <input type="text" id="workerAppId" value="712041"></label>
+    </fieldset>
+
+    <div id="tableEditors"><!-- built by JS from TABLE_DEFS --></div>
+  </aside>
+
+  <!-- ============ DOCUMENT PREVIEW (rendered by JS) ============ -->
+  <main class="preview-wrap">
+    <div id="pages"></div>
+  </main>
+
+</div>
+
+<div id="stage" aria-hidden="true"></div>
+
+<script src="script.js"></script>
+</body>
+</html>
