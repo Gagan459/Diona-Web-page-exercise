@@ -43,8 +43,3 @@ This is intentionally block-level (a whole section moves together) rather than s
 ## AI assistance
 
 This was built with AI (Claude) assistance. See [`PROMPT_HISTORY.md`](./PROMPT_HISTORY.md) for the prompt history, called out per the assignment instructions.
-
-## Video
-
-- Exercise 1 walkthrough: `<add link or repo path here>`
-- Exercise 2 walkthrough: `<add link or repo path here>`
